@@ -15,6 +15,8 @@ namespace PurePrismDemp.ViewModels
         public MainWindowViewModel(ICustomerStoreService customerStore)
         {
             this._customerStore = customerStore;
+            this._selectedCustomer = string.Empty;
+            this._commandLoad = new DelegateCommand(CommandLoadExecute); ;
         }
 
 
@@ -34,8 +36,8 @@ namespace PurePrismDemp.ViewModels
             }
         }
 
-        private DelegateCommand _commandLoad;
-        public DelegateCommand CommandLoad => this._commandLoad ??= new DelegateCommand(CommandLoadExecute);
+        private readonly DelegateCommand _commandLoad;
+        public DelegateCommand CommandLoad => this._commandLoad;
 
         private void CommandLoadExecute()
         {

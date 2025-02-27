@@ -1,0 +1,49 @@
+﻿<Window x:Class="BindCommandToComboBoxItemViaControlTemplate.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindCommandToComboBoxItemViaControlTemplate.Views"
+        xmlns:viewmodels="clr-namespace:BindCommandToComboBoxItemViaControlTemplate.ViewModels"
+        xmlns:prism="http://prismlibrary.com/" 
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <ComboBox Margin="20" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Customers}" >
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Border BorderThickness="0 0 0 1" BorderBrush="Gray">
+                                    <Grid Height="40" Background="Bisque">
+                                        <ContentPresenter x:Name="contentpresenter"/>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                                <prism:InvokeCommandAction 
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, 
+                                                          Path=DataContext.ClickCMBBItemCommand}"
+                                                    CommandParameter="{Binding ElementName=contentpresenter,Path=Content}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Grid>
+                                </Border>
+
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding .}" 
+                               TextAlignment="Left"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </StackPanel>
+</Window>

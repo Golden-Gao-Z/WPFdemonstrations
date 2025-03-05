@@ -5,6 +5,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindCommandToComboBoxItemViaControlTemplate.Views"
+        xmlns:ll="clr-namespace:BindCommandToComboBoxItemViaControlTemplate"
         xmlns:viewmodels="clr-namespace:BindCommandToComboBoxItemViaControlTemplate.ViewModels"
         xmlns:prism="http://prismlibrary.com/" 
         prism:ViewModelLocator.AutoWireViewModel="True"
@@ -12,30 +13,40 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="specialComboBoxItem" TargetType="ComboBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border BorderThickness="0 0 0 1" BorderBrush="Gray">
+                            <Grid Height="40" Background="Bisque">
+                                <ContentPresenter/>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <!--use attach property here, accept value through visual tree. bind value in comboboxitem propertys using setters.-->
+                                        <prism:InvokeCommandAction 
+                                                Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                                          Path=(ll:ComboBoxHelper.ComboBoxItemClickCommand)}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},
+                                                          Path=(ll:ComboBoxHelper.ComboBoxItemClickCommandParameter)}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Grid>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <StackPanel>
         <ComboBox Margin="20" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Customers}" >
             <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ComboBoxItem">
-                                <Border BorderThickness="0 0 0 1" BorderBrush="Gray">
-                                    <Grid Height="40" Background="Bisque">
-                                        <ContentPresenter x:Name="contentpresenter"/>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                                <prism:InvokeCommandAction 
-                                                Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, 
-                                                          Path=DataContext.ClickCMBBItemCommand}"
-                                                    CommandParameter="{Binding ElementName=contentpresenter,Path=Content}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </Grid>
-                                </Border>
-
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
+                <Style TargetType="ComboBoxItem" BasedOn="{StaticResource specialComboBoxItem}">
+                    <Setter Property="ll:ComboBoxHelper.ComboBoxItemClickCommand"
+                            Value="{Binding RelativeSource={RelativeSource AncestorType=Window},Path=DataContext.ClickCMBBItemCommand}"/>
+                    <Setter Property="ll:ComboBoxHelper.ComboBoxItemClickCommandParameter"
+                            Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content}"/>
                 </Style>
             </ComboBox.ItemContainerStyle>
             <ComboBox.ItemTemplate>

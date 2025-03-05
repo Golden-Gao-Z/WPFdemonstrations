@@ -16,7 +16,7 @@ namespace BindCommandToComboBoxItemViaControlTemplate.ViewModels
         {
             this._customerStore = customerStore;
             this._selectedCustomer = string.Empty;
-            this._clickCMBBItemCommand = new DelegateCommand<string>(ClickCMBBItem);
+            this._clickCMBBItemCommand = new DelegateCommand<object>(ClickCMBBItem);
             this.Customers.Clear();
             this.Customers.AddRange(this._customerStore.GetAll());
         }
@@ -38,10 +38,10 @@ namespace BindCommandToComboBoxItemViaControlTemplate.ViewModels
             }
         }
 
-        private readonly DelegateCommand<string> _clickCMBBItemCommand;
-        public DelegateCommand<string> ClickCMBBItemCommand => this._clickCMBBItemCommand;
+        private readonly DelegateCommand<object> _clickCMBBItemCommand;
+        public DelegateCommand<object> ClickCMBBItemCommand => this._clickCMBBItemCommand;
 
-        private void ClickCMBBItem(string content)
+        private void ClickCMBBItem(object content)
         {
             Debug.WriteLine($"item click. [{content}]");
         }

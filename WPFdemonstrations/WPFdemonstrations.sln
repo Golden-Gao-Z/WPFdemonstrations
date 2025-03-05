@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurePrismDemp", "PurePrismD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindCommandToComboBoxItemViaControlTemplate", "BindCommandToComboBoxItemViaControlTemplate\BindCommandToComboBoxItemViaControlTemplate.csproj", "{1F1674E9-B665-400A-A3B4-B05BF8C3B8D8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContainerTest", "ContainerTest", "{5585B10E-77CF-4D56-ACA4-85F1FBE1D451}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockPanelTest", "DockPanelTest\DockPanelTest.csproj", "{E5C05261-7E54-4E49-B3C2-015B6440C806}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +27,17 @@ Global
 		{1F1674E9-B665-400A-A3B4-B05BF8C3B8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F1674E9-B665-400A-A3B4-B05BF8C3B8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F1674E9-B665-400A-A3B4-B05BF8C3B8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C05261-7E54-4E49-B3C2-015B6440C806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C05261-7E54-4E49-B3C2-015B6440C806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C05261-7E54-4E49-B3C2-015B6440C806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C05261-7E54-4E49-B3C2-015B6440C806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A9E560A-EFF4-4C6B-80B3-6E10E0AF7B2E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{E5C05261-7E54-4E49-B3C2-015B6440C806} = {5585B10E-77CF-4D56-ACA4-85F1FBE1D451}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D484CA8A-E829-4C42-8A7E-848C3EC78C87}
